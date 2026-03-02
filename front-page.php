@@ -1,25 +1,36 @@
 <?php get_header(); ?>
 
-<main class="container">
-    <section class="hero">
-        <h2>Bienvenido a nuestra Agencia de Portafolio</h2>
-        <p>Creamos experiencias digitales personalizadas.</p>
+<main>
+    <section class="hero-banner">
+        <div class="container">
+            <h1>Expertos en Desarrollo Custom</h1>
+            <p>Transformamos ideas en productos digitales de alto rendimiento.</p>
+        </div>
     </section>
 
-    <section class="latest-posts">
-        <h3>Últimas entradas</h3>
-        <?php
-        if (have_posts()) :
-            while (have_posts()) : the_post(); ?>
-                <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-                    <h4><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
-                    <?php the_excerpt(); ?>
-                </article>
-            <?php endwhile;
-        else :
-            echo '<p>No hay contenido publicado todavía.</p>';
-        endif;
-        ?>
+    <section class="proyectos-recientes container">
+        <h2 class="section-title">Nuestros Proyectos</h2>
+        
+        <div class="proyectos-grid">
+            <?php
+            $args = array(
+                'post_type'      => 'proyecto',
+                'posts_per_page' => 3, // Solo mostramos los últimos 3
+            );
+
+            $proyectos_query = new WP_Query($args);
+
+            if ($proyectos_query->have_posts()) :
+                while ($proyectos_query->have_posts()) : $proyectos_query->the_post();
+                    // AQUÍ LLAMAMOS AL COMPONENTE REUTILIZABLE
+                    get_template_part('template-parts/content', 'proyecto');
+                endwhile;
+                wp_reset_postdata(); // OBLIGATORIO al usar WP_Query
+            else :
+                echo '<p>Aún no hay proyectos cargados.</p>';
+            endif;
+            ?>
+        </div>
     </section>
 </main>
 
