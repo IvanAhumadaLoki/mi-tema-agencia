@@ -2,26 +2,19 @@
     <div class="proyecto-thumbnail">
         <?php if (has_post_thumbnail()) : ?>
             <a href="<?php the_permalink(); ?>">
-                <?php the_post_thumbnail('medium_large'); ?>
+                <?php the_post_thumbnail('proyecto-thumb'); ?>
             </a>
         <?php else : ?>
-            <div class="no-image">Sin imagen</div>
+            <div style="height:200px; background:#eee; display:flex; align-items:center; justify-content:center;">Sin Imagen</div>
         <?php endif; ?>
     </div>
 
     <div class="proyecto-info">
+        <span class="tech-tag"><?php echo esc_html(get_field('tecnologias')); ?></span>
         <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-        
-        <?php 
-        $tecnologias = get_field('tecnologias');
-        if($tecnologias): ?>
-            <span class="tech-tag"><?php echo esc_html($tecnologias); ?></span>
-        <?php endif; ?>
-
         <div class="proyecto-excerpt">
-            <?php echo wp_trim_words(get_the_excerpt(), 15); ?>
+            <?php the_excerpt(); ?>
         </div>
-
-        <a href="<?php the_permalink(); ?>" class="leer-mas">Ver Proyecto &rarr;</a>
+        <a href="<?php the_permalink(); ?>" class="leer-mas">Ver detalles &rarr;</a>
     </div>
 </article>

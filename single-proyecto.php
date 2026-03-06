@@ -10,23 +10,23 @@
         <article <?php post_class(); ?>>
             <h1><?php the_title(); ?></h1>
 
-            <div class="proyecto-meta" style="background: #f9f9f9; padding: 15px; margin-bottom: 20px;">
+            <div class="proyecto-meta" style="background: #f9f9f9; padding: 15px; margin-bottom: 20px; border-radius: 8px;">
                 <?php if($tecnologias): ?>
                     <p><strong>Tecnologías usadas:</strong> <?php echo esc_html($tecnologias); ?></p>
                 <?php endif; ?>
 
                 <?php if($url_proyecto): ?>
-                    <p><a href="<?php echo esc_url($url_proyecto); ?>" target="_blank" class="boton-proyecto">Visitar sitio web del cliente</a></p>
+                    <p><a href="<?php echo esc_url($url_proyecto); ?>" target="_blank" class="boton-proyecto" rel="noopener noreferrer">Visitar sitio web del cliente</a></p>
                 <?php endif; ?>
             </div>
 
             <?php if (has_post_thumbnail()) : ?>
                 <div class="proyecto-imagen-principal">
-                    <?php the_post_thumbnail('large'); ?>
+                    <?php the_post_thumbnail('large', array('class' => 'img-fluid')); ?>
                 </div>
             <?php endif; ?>
 
-            <div class="proyecto-descripcion">
+            <div class="proyecto-descripcion" style="margin-top: 30px;">
                 <?php the_content(); ?>
             </div>
         </article>
